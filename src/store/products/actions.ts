@@ -7,7 +7,6 @@ export const fetchProducts = () => {
     try {
       dispatch({ type: ProductActionTypes.FETCH_PRODUCTS });
       const response = await axios.get("http://localhost:3000/db.json");
-      console.log("response: ", response.data.pizzas);
       dispatch({
         type: ProductActionTypes.FETCH_PRODUCTS_SUCCESS,
         payload: response.data.pizzas,

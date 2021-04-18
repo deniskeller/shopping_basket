@@ -1,13 +1,34 @@
 import React from "react";
 import { Button } from "../index";
+import { useDispatch, useSelector } from "react-redux";
+import { addProductToCart } from "../../store/cart/actions";
+import { CartItem } from "../../store/cart/actionTypes";
+import { RootState } from "../../store/reducers/rootReducer";
 
 type ProductItemProps = {
+  id: number;
   imageUrl?: string;
   name: string;
   price: number;
+  quantity: number;
 };
 
-const ProductItem: React.FC<ProductItemProps> = ({ name, price, imageUrl }) => {
+const ProductItem: React.FC<ProductItemProps> = ({
+  id,
+  name,
+  price,
+  imageUrl,
+}) => {
+  const dispatch = useDispatch();
+
+  // const items = useSelector((state: RootState) => state.cart.items);
+  // const findItem = items.find((item) => item.id === id);
+  // console.log("findItem: ", findItem);
+
+  const handlerAddProduct = (id: number) => {
+    dispatch(addProductToCart(id));
+  };
+
   return (
     <div className="pizza-block">
       <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
@@ -18,7 +39,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ name, price, imageUrl }) => {
         <Button
           className="button--add"
           outline
-          onClick={() => console.log("kek")}
+          onClick={() => handlerAddProduct(id)}
         >
           <svg
             width="12"
@@ -33,7 +54,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ name, price, imageUrl }) => {
             />
           </svg>
           <span>Добавить</span>
-          {/* {totalCount && <i>{totalCount}</i>} */}
+          {/* {quantity && <i>{quantity}</i>} */}
         </Button>
       </div>
     </div>

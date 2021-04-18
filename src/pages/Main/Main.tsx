@@ -12,7 +12,6 @@ const Main: React.FC<RouteComponentProps> = ({ location }) => {
   const { products, error, loading } = useSelector(
     (state: RootState) => state.product
   );
-  console.log("products: ", products);
 
   React.useEffect(() => {
     dispatch(fetchProducts());
