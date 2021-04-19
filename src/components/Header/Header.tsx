@@ -4,9 +4,26 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/reducers/rootReducer";
 
-const Header = () => {
+const Header: React.FC = () => {
+  // const items = useSelector((state: RootState) => state.cart.items);
   const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
   const totalCount = useSelector((state: RootState) => state.cart.totalCount);
+
+  // const computedTotalPrice = (): number => {
+  //   const totalCount = items.reduce(
+  //     (total, item) => total + item.quantity * item.price,
+  //     0
+  //   );
+  //   return totalCount;
+  // };
+
+  // const computedTotalCount = (): number => {
+  //   const totalCount = Object.keys(items).reduce(
+  //     (sum, key: any) => items[key].quantity + sum,
+  //     0
+  //   );
+  //   return totalCount;
+  // };
 
   return (
     <div className="header">

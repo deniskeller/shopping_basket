@@ -21,9 +21,12 @@ const ProductItem: React.FC<ProductItemProps> = ({
 }) => {
   const dispatch = useDispatch();
 
-  // const items = useSelector((state: RootState) => state.cart.items);
-  // const findItem = items.find((item) => item.id === id);
-  // console.log("findItem: ", findItem);
+  const items = useSelector((state: RootState) => state.cart.items);
+
+  const computedQuantity = (id: number): number | undefined => {
+    const findItem = items.find((item) => item.id === id);
+    return findItem?.quantity;
+  };
 
   const handlerAddProduct = (id: number) => {
     dispatch(addProductToCart(id));
@@ -54,7 +57,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
             />
           </svg>
           <span>Добавить</span>
-          {/* {quantity && <i>{quantity}</i>} */}
+          {computedQuantity(id) && <i>{computedQuantity(id)}</i>}
         </Button>
       </div>
     </div>

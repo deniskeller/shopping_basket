@@ -2,10 +2,14 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import emptyCart from "../../assets/img/empty-cart.png";
 import { Link } from "react-router-dom";
+import { RootState } from "../../store/reducers/rootReducer";
+import { CartProduct } from "../../components/index";
 
-function Cart() {
+const Cart: React.FC = () => {
   const dispatch = useDispatch();
-  const [totalCount, setTotalCount] = React.useState(0);
+  const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
+  const totalCount = useSelector((state: RootState) => state.cart.totalCount);
+  const items = useSelector((state: RootState) => state.cart.items);
 
   return (
     <div className="wrapper">
@@ -88,19 +92,19 @@ function Cart() {
                 </div>
               </div>
               <div className="content__items">
-                {/* {products.map((item, index) => (
-                  <CartItem               />
-                ))} */}
+                {items.map((item, index) => (
+                  <CartProduct key={index} item={item} />
+                ))}
               </div>
               <div className="cart__bottom">
                 <div className="cart__bottom-details">
                   <span>
                     {" "}
-                    Всего пицц: <b>2 шт.</b>{" "}
+                    Всего пицц: <b>{totalCount} шт.</b>{" "}
                   </span>
                   <span>
                     {" "}
-                    Сумма заказа: <b>300 ₽</b>{" "}
+                    Сумма заказа: <b>{totalPrice} ₽</b>{" "}
                   </span>
                 </div>
                 <div className="cart__bottom-buttons">
@@ -151,6 +155,6 @@ function Cart() {
       </div>
     </div>
   );
-}
+};
 
 export default Cart;

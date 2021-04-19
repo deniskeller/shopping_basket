@@ -6,16 +6,21 @@ const initialState: ICartState = {
   totalCount: 0,
 };
 
-// const computedTotalPrice = (arr: any[]): void =>
-//   arr.reduce((total, item) => item.price + total, 0);
+const computedTotalPrice = (arr: any[]): number => {
+  const totalCount = arr.reduce(
+    (total, item) => total + item.quantity * item.price,
+    0
+  );
+  return totalCount;
+};
 
-// const computedTotalPrice = (newItems: any) => {
-//   const totalPrice = Object.keys(newItems).reduce(
-//     (sum, key) => newItems[key].price + sum,
-//     0
-//   );
-//   return totalPrice;
-// };
+const computedTotalCount = (arr: any[]): number => {
+  const totalCount = Object.keys(arr).reduce(
+    (sum, key: any) => arr[key].quantity + sum,
+    0
+  );
+  return totalCount;
+};
 
 export const cartReducer = (
   state: ICartState = initialState,
@@ -23,21 +28,27 @@ export const cartReducer = (
 ): ICartState => {
   switch (action.type) {
     case CartActionTypes.ADD_PRODUCT_TO_CART: {
+      const newItems = [...state.items, action.payload];
       return {
         ...state,
-        items: [...state.items, action.payload],
+        items: newItems,
+        totalPrice: computedTotalPrice(newItems),
+        totalCount: computedTotalCount(newItems),
       };
     }
 
     case CartActionTypes.CHANGE_ITEM: {
+      const newItems = state.items.map((item) => {
+        if (item.id === action.payload.id) {
+          return { ...item, quantity: action.payload.quantity };
+        }
+        return item;
+      });
       return {
         ...state,
-        items: state.items.map((item) => {
-          if (item.id === action.payload.id) {
-            return { ...item, quantity: action.payload.quantity };
-          }
-          return item;
-        }),
+        items: newItems,
+        totalPrice: computedTotalPrice(newItems),
+        totalCount: computedTotalCount(newItems),
       };
     }
 
