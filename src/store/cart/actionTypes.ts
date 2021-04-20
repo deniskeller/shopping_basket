@@ -4,14 +4,14 @@ export interface ICartState {
   totalCount: number;
 }
 
-export interface MenuItem {
+export interface IMenuItem {
   id: number;
   name: string;
   price: number;
   imageUrl?: string;
 }
 
-export interface CartItem extends MenuItem {
+export interface CartItem extends IMenuItem {
   quantity: number;
 }
 

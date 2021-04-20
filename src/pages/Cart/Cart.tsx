@@ -4,13 +4,44 @@ import emptyCart from "../../assets/img/empty-cart.png";
 import { Link } from "react-router-dom";
 import { RootState } from "../../store/reducers/rootReducer";
 import { CartProduct } from "../../components/index";
-import { clearCartAction } from "../../store/cart/actions";
+import {
+  addNewFormItemAction,
+  clearCartAction,
+} from "../../store/cart/actions";
+import { Button } from "../../components/index";
+import { CartItem } from "../../store/cart/actionTypes";
 
 const Cart: React.FC = () => {
   const dispatch = useDispatch();
   const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
   const totalCount = useSelector((state: RootState) => state.cart.totalCount);
   const items = useSelector((state: RootState) => state.cart.items);
+  console.log("items: ", items);
+  const products = useSelector((state: RootState) => state.product.products);
+
+  const [name, setName] = React.useState("");
+  const [price, setPrice] = React.useState("");
+  const changeHandlerName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+  const changeHandlerPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPrice(e.target.value as any);
+  };
+  const submitHandler = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+
+    if (name !== "" && price !== null) {
+      let newItem: CartItem = {
+        id: products.length,
+        name: name,
+        price: +price,
+        quantity: 1,
+      };
+      dispatch(addNewFormItemAction(newItem));
+      setName("");
+      setPrice("");
+    }
+  };
 
   const clearCart = () => {
     if (window.confirm("Уверены, что хотите очистить корзину товаров?")) {
@@ -22,6 +53,27 @@ const Cart: React.FC = () => {
     <div className="wrapper">
       <div className="content">
         <div className="container container--cart">
+          <form className="">
+            <input
+              type="text"
+              placeholder="Введите название товара"
+              className=""
+              name="name"
+              required
+              value={name.trim()}
+              onChange={changeHandlerName}
+            />
+            <input
+              type="text"
+              placeholder="Введите цену товара"
+              className=""
+              name="price"
+              required
+              value={price.trim()}
+              onChange={changeHandlerPrice}
+            />
+            <Button onClick={submitHandler}>Добавить товар</Button>
+          </form>
           {totalCount ? (
             <div className="cart">
               <div className="cart__top">

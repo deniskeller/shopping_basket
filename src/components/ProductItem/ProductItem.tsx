@@ -2,7 +2,6 @@ import React from "react";
 import { Button } from "../index";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductToCart } from "../../store/cart/actions";
-import { CartItem } from "../../store/cart/actionTypes";
 import { RootState } from "../../store/reducers/rootReducer";
 
 type ProductItemProps = {

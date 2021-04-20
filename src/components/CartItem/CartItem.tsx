@@ -12,12 +12,9 @@ type ItemProps = {
 
 const CartProduct: React.FC<ItemProps> = React.memo(({ item }) => {
   const dispatch = useDispatch();
+
   const computedTotalPrice = (): number => {
     return item.quantity * item.price;
-  };
-
-  const deleteItem = () => {
-    dispatch(deleteItemAction(item.id));
   };
 
   const deleteAllItem = () => {
@@ -37,7 +34,11 @@ const CartProduct: React.FC<ItemProps> = React.memo(({ item }) => {
   return (
     <div className="cart__item">
       <div className="cart__item-img">
-        <img className="pizza-block__image" src={item.imageUrl} alt="Pizza" />
+        <img
+          className="pizza-block__image"
+          src={item.imageUrl || "https://via.placeholder.com/80x80"}
+          alt="Pizza"
+        />
       </div>
       <div className="cart__item-info">
         <h3>{item.name}</h3>

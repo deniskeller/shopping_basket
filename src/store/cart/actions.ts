@@ -58,3 +58,11 @@ export const clearCartAction = () => {
     type: CartActionTypes.CLEAR_CART,
   };
 };
+
+export const addNewFormItemAction = (item: CartItem) => (dispatch: Dispatch<CartAction>,
+  getState: Function) => {
+  dispatch({
+    type: CartActionTypes.ADD_PRODUCT_TO_CART,
+    payload: item,
+  });
+}
