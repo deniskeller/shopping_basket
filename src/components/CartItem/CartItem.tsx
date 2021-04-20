@@ -1,13 +1,37 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import {
+  changeQuantityAction,
+  deleteItemAction,
+} from "../../store/cart/actions";
 import { CartItem } from "../../store/cart/actionTypes";
 
 type ItemProps = {
   item: CartItem;
 };
 
-const CartProduct: React.FC<ItemProps> = ({ item }) => {
+const CartProduct: React.FC<ItemProps> = React.memo(({ item }) => {
+  const dispatch = useDispatch();
   const computedTotalPrice = (): number => {
     return item.quantity * item.price;
+  };
+
+  const deleteItem = () => {
+    dispatch(deleteItemAction(item.id));
+  };
+
+  const deleteAllItem = () => {
+    if (window.confirm("Уверены, что хотите удалить товар?")) {
+      dispatch(deleteItemAction(item.id));
+    }
+  };
+
+  const countPlus = () => {
+    dispatch(changeQuantityAction(item.quantity + 1, item.id));
+  };
+
+  const countMinus = () => {
+    dispatch(changeQuantityAction(item.quantity - 1, item.id));
   };
 
   return (
@@ -21,7 +45,7 @@ const CartProduct: React.FC<ItemProps> = ({ item }) => {
       <div className="cart__item-count">
         <div
           className="button button--outline button--circle cart__item-count-minus"
-          // onClick={countMinus}
+          onClick={countMinus}
         >
           <svg
             width="10"
@@ -43,7 +67,7 @@ const CartProduct: React.FC<ItemProps> = ({ item }) => {
         <b>{item.quantity}</b>
         <div
           className="button button--outline button--circle cart__item-count-plus"
-          // onClick={countPlus}
+          onClick={countPlus}
         >
           <svg
             width="10"
@@ -70,7 +94,7 @@ const CartProduct: React.FC<ItemProps> = ({ item }) => {
       <div className="cart__item-remove">
         <div
           className="button button--outline button--circle"
-          // onClick={removeProduct}
+          onClick={deleteAllItem}
         >
           <svg
             width="10"
@@ -92,6 +116,6 @@ const CartProduct: React.FC<ItemProps> = ({ item }) => {
       </div>
     </div>
   );
-};
+});
 
 export default CartProduct;

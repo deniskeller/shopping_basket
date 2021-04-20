@@ -1,25 +1,10 @@
 import { CartAction, CartActionTypes, ICartState } from "../cart/actionTypes";
+import { computedTotalCount, computedTotalPrice } from "../utils";
 
 const initialState: ICartState = {
   items: [],
   totalPrice: 0,
   totalCount: 0,
-};
-
-const computedTotalPrice = (arr: any[]): number => {
-  const totalCount = arr.reduce(
-    (total, item) => total + item.quantity * item.price,
-    0
-  );
-  return totalCount;
-};
-
-const computedTotalCount = (arr: any[]): number => {
-  const totalCount = Object.keys(arr).reduce(
-    (sum, key: any) => arr[key].quantity + sum,
-    0
-  );
-  return totalCount;
 };
 
 export const cartReducer = (
@@ -51,6 +36,24 @@ export const cartReducer = (
         totalCount: computedTotalCount(newItems),
       };
     }
+
+    case CartActionTypes.DELETE_PRODUCT: {
+      const newItems = state.items.filter((item) => item.id !== action.payload);
+      return {
+        ...state,
+        items: newItems,
+        totalPrice: computedTotalPrice(newItems),
+        totalCount: computedTotalCount(newItems),
+      };
+    }
+
+    case CartActionTypes.CLEAR_CART:
+      return {
+        ...state,
+        items: [],
+        totalPrice: 0,
+        totalCount: 0,
+      };
 
     default:
       return state;

@@ -18,6 +18,8 @@ export interface CartItem extends MenuItem {
 export enum CartActionTypes {
   ADD_PRODUCT_TO_CART = "ADD_PRODUCT_TO_CART",
   CHANGE_ITEM = "CHANGE_ITEM",
+  DELETE_PRODUCT = "DELETE_PRODUCT",
+  CLEAR_CART = "CLEAR_CART",
 }
 
 interface IAddProductToCart {
@@ -32,5 +34,17 @@ interface IChangeProduct {
     quantity: number;
   };
 }
+interface IDeleteProduct {
+  type: CartActionTypes.DELETE_PRODUCT;
+  payload: number;
+}
+interface IClearCart {
+  type: CartActionTypes.CLEAR_CART;
+  payload: CartItem;
+}
 
-export type CartAction = IAddProductToCart | IChangeProduct;
+export type CartAction =
+  | IAddProductToCart
+  | IChangeProduct
+  | IDeleteProduct
+  | IClearCart;

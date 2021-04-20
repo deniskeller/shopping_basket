@@ -6,7 +6,6 @@ export const addProductToCart = (id: number) => {
     const items: CartItem[] = getState().cart.items;
     const findItem = items.find((item) => item.id === id);
     if (findItem) {
-      console.log("Товар добавлен в корзину1");
       dispatch({
         type: CartActionTypes.CHANGE_ITEM,
         payload: {
@@ -23,9 +22,39 @@ export const addProductToCart = (id: number) => {
         type: CartActionTypes.ADD_PRODUCT_TO_CART,
         payload: item,
       });
-      console.log("Товар добавлен в корзину2");
     }
-    const cartItems = getState().cart.items;
-    console.log("cartItems: ", cartItems);
+  };
+};
+
+export const changeQuantityAction = (quantity: number, id: number) => (
+  dispatch: Dispatch<CartAction>,
+  getState: Function
+) => {
+  dispatch({
+    type: CartActionTypes.CHANGE_ITEM,
+    payload: {
+      id,
+      quantity,
+    },
+  });
+  const item = getState().cart.items.find((item: CartItem) => item.id === id);
+  if (item!.quantity < 1) {
+    dispatch({
+      type: CartActionTypes.DELETE_PRODUCT,
+      payload: id,
+    });
+  }
+};
+
+export const deleteItemAction = (id: number) => {
+  return {
+    type: CartActionTypes.DELETE_PRODUCT,
+    payload: id,
+  };
+};
+
+export const clearCartAction = () => {
+  return {
+    type: CartActionTypes.CLEAR_CART,
   };
 };

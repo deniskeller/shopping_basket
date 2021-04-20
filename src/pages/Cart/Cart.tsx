@@ -4,12 +4,19 @@ import emptyCart from "../../assets/img/empty-cart.png";
 import { Link } from "react-router-dom";
 import { RootState } from "../../store/reducers/rootReducer";
 import { CartProduct } from "../../components/index";
+import { clearCartAction } from "../../store/cart/actions";
 
 const Cart: React.FC = () => {
   const dispatch = useDispatch();
   const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
   const totalCount = useSelector((state: RootState) => state.cart.totalCount);
   const items = useSelector((state: RootState) => state.cart.items);
+
+  const clearCart = () => {
+    if (window.confirm("Уверены, что хотите очистить корзину товаров?")) {
+      dispatch(clearCartAction());
+    }
+  };
 
   return (
     <div className="wrapper">
@@ -88,7 +95,7 @@ const Cart: React.FC = () => {
                     />
                   </svg>
 
-                  <span>Очистить корзину</span>
+                  <span onClick={clearCart}>Очистить корзину</span>
                 </div>
               </div>
               <div className="content__items">
