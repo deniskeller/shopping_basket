@@ -16,8 +16,6 @@ const Cart: React.FC = () => {
   const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
   const totalCount = useSelector((state: RootState) => state.cart.totalCount);
   const items = useSelector((state: RootState) => state.cart.items);
-  console.log("items: ", items);
-  const products = useSelector((state: RootState) => state.product.products);
 
   const [name, setName] = React.useState("");
   const [price, setPrice] = React.useState("");
@@ -25,14 +23,13 @@ const Cart: React.FC = () => {
     setName(e.target.value);
   };
   const changeHandlerPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPrice(e.target.value as any);
+    setPrice(e.target.value.replace(/\D/, ""));
   };
   const submitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
-
     if (name !== "" && price !== null) {
       let newItem: CartItem = {
-        id: products.length,
+        id: Date.now(),
         name: name,
         price: +price,
         quantity: 1,
@@ -65,6 +62,7 @@ const Cart: React.FC = () => {
             />
             <input
               type="text"
+              pattern="[0-9]*"
               placeholder="Введите цену товара"
               className=""
               name="price"

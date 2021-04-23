@@ -37,7 +37,9 @@ export const changeQuantityAction = (quantity: number, id: number) => (
       quantity,
     },
   });
-  const item = getState().cart.items.find((item: CartItem) => item.id === id);
+  const item: CartItem = getState().cart.items.find(
+    (item: CartItem) => item.id === id
+  );
   if (item!.quantity < 1) {
     dispatch({
       type: CartActionTypes.DELETE_PRODUCT,
@@ -59,10 +61,12 @@ export const clearCartAction = () => {
   };
 };
 
-export const addNewFormItemAction = (item: CartItem) => (dispatch: Dispatch<CartAction>,
-  getState: Function) => {
+export const addNewFormItemAction = (item: CartItem) => (
+  dispatch: Dispatch<CartAction>,
+  getState: Function
+) => {
   dispatch({
     type: CartActionTypes.ADD_PRODUCT_TO_CART,
     payload: item,
   });
-}
+};

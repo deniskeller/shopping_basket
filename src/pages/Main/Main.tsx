@@ -5,9 +5,7 @@ import { fetchProducts } from "../../store/products/actions";
 import { RootState } from "../../store/reducers/rootReducer";
 import { ProductItem, LoadingItem } from "../../components";
 
-const Main: React.FC<RouteComponentProps> = ({ location }) => {
-  // const id = location.pathname;
-  // console.log("id: ", id);
+const Main: React.FC<RouteComponentProps> = () => {
   const dispatch = useDispatch();
   const { products, error, loading } = useSelector(
     (state: RootState) => state.product
@@ -31,11 +29,7 @@ const Main: React.FC<RouteComponentProps> = ({ location }) => {
               .map((_, index) => <LoadingItem key={index} />)
           : products &&
             products.map((product) => (
-              <ProductItem
-                key={product.id}
-                {...product}
-                // addProduct={handlerAddProductToCart}
-              />
+              <ProductItem key={product.id} {...product} />
             ))}
       </div>
     </div>
