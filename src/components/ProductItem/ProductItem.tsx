@@ -34,7 +34,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
   return (
     <div className="pizza-block">
       <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
-      <h4 className="pizza-block__title" data-testid="title">
+      <h4 className="pizza-block__title" data-testid="name">
         {name}
       </h4>
       <div className="pizza-block__bottom">

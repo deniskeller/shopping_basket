@@ -22,7 +22,7 @@ const Main: React.FC<RouteComponentProps> = () => {
   return (
     <div className="container">
       <div className="content__top"></div>
-      <div className="content__items">
+      <div className="content__items" data-testid="content__items">
         {loading
           ? Array(products.length)
               .fill(0)

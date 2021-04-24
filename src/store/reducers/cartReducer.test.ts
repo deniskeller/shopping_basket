@@ -1,8 +1,8 @@
 // @ts-nocheck
-
 import { deleteItemAction } from "../cart/actions";
+import { cartReducer } from "./cartReducer";
 
-describe("тесты страницы корзины", () => {
+describe("тесты редюсеров корзины", () => {
   const state = {
     items: [],
     totalPrice: 0,

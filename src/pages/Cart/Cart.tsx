@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import emptyCart from "../../assets/img/empty-cart.png";
 import { Link } from "react-router-dom";
 import { RootState } from "../../store/reducers/rootReducer";
-import { CartProduct } from "../../components/index";
+import { CartProduct, Input } from "../../components/index";
 import {
   addNewFormItemAction,
   clearCartAction,
@@ -19,11 +19,12 @@ const Cart: React.FC = () => {
 
   const [name, setName] = React.useState("");
   const [price, setPrice] = React.useState("");
-  const changeHandlerName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
+
+  const changeHandlerName = (value: string) => {
+    setName(value);
   };
-  const changeHandlerPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPrice(e.target.value.replace(/\D/, ""));
+  const changeHandlerPrice = (value: string) => {
+    setPrice(value.replace(/\D/, ""));
   };
   const submitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -50,25 +51,25 @@ const Cart: React.FC = () => {
     <div className="wrapper">
       <div className="content">
         <div className="container container--cart">
-          <form className="">
-            <input
-              type="text"
-              placeholder="Введите название товара"
-              className=""
-              name="name"
-              required
-              value={name.trim()}
+          <form className="content__form">
+            <Input
+              value={name}
+              name={name}
               onChange={changeHandlerName}
-            />
-            <input
+              placeholder="Введите название товара"
               type="text"
-              pattern="[0-9]*"
-              placeholder="Введите цену товара"
-              className=""
-              name="price"
               required
-              value={price.trim()}
+              className="content__form__input"
+            />
+            <Input
+              value={price}
+              name={price}
               onChange={changeHandlerPrice}
+              placeholder="Введите цену товара"
+              type="text"
+              required
+              pattern="[0-9]*"
+              className="content__form__input"
             />
             <Button onClick={submitHandler}>Добавить товар</Button>
           </form>

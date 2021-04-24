@@ -6,19 +6,35 @@ import { ProductAction, ProductActionTypes } from "./actionTypes";
 export const fetchProducts = () => {
   return async (dispatch: Dispatch<ProductAction>) => {
     try {
-      dispatch({ type: ProductActionTypes.FETCH_PRODUCTS });
+      dispatch(fetchProductsAction());
       const response = await axios.get<CartItem[]>(
         "http://localhost:3000/db.json"
       );
-      dispatch({
-        type: ProductActionTypes.FETCH_PRODUCTS_SUCCESS,
-        payload: response.data,
-      });
+      dispatch(fetchProductsSuccessAction(response.data));
     } catch (error) {
-      dispatch({
-        type: ProductActionTypes.FETCH_PRODUCTS_ERROR,
-        payload: "произошла ошибка при загрузке пользователей",
-      });
+      dispatch(
+        fetchProductsErrorAction("произошла ошибка при загрузке пользователей")
+      );
     }
+  };
+};
+
+export const fetchProductsAction = (): ProductAction => {
+  return {
+    type: ProductActionTypes.FETCH_PRODUCTS,
+  };
+};
+
+export const fetchProductsSuccessAction = (data: CartItem[]): ProductAction => {
+  return {
+    type: ProductActionTypes.FETCH_PRODUCTS_SUCCESS,
+    payload: data,
+  };
+};
+
+export const fetchProductsErrorAction = (error: string): ProductAction => {
+  return {
+    type: ProductActionTypes.FETCH_PRODUCTS_ERROR,
+    payload: error,
   };
 };
