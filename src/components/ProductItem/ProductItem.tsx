@@ -9,7 +9,7 @@ type ProductItemProps = {
   imageUrl?: string;
   name: string;
   price: number;
-  quantity: number;
+  quantity?: number;
 };
 
 const ProductItem: React.FC<ProductItemProps> = ({
@@ -32,9 +32,9 @@ const ProductItem: React.FC<ProductItemProps> = ({
   };
 
   return (
-    <div className="pizza-block">
+    <div className="pizza-block" data-testid={`${name}-${id}`}>
       <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
-      <h4 className="pizza-block__title" data-testid="name">
+      <h4 className="pizza-block__title" data-testid="itemName">
         {name}
       </h4>
       <div className="pizza-block__bottom">
@@ -58,7 +58,9 @@ const ProductItem: React.FC<ProductItemProps> = ({
             />
           </svg>
           <span>Добавить</span>
-          {computedQuantity(id) && <i>{computedQuantity(id)}</i>}
+          {computedQuantity(id) && (
+            <i data-testid="quantity">{computedQuantity(id)}</i>
+          )}
         </Button>
       </div>
     </div>

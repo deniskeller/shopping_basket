@@ -33,6 +33,7 @@ const Input: React.FC<IInputProps> = ({
       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
         onChange(e.target.value.trim())
       }
+      data-testid="input"
     />
   );
 };

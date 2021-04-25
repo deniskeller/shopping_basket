@@ -1,5 +1,7 @@
+import { CartItem } from "../cart/actionTypes";
+
 export interface IProductState {
-  products: any[];
+  products: CartItem[];
   loading: boolean;
   error: null | string;
 }
@@ -16,7 +18,7 @@ interface IFetchProductsAction {
 
 interface IFetchProductsSuccessAction {
   type: ProductActionTypes.FETCH_PRODUCTS_SUCCESS;
-  payload: any[];
+  payload: CartItem[];
 }
 
 interface IFetchProductsErrorAction {

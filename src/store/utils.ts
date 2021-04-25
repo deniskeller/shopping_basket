@@ -1,4 +1,6 @@
-export const computedTotalPrice = (arr: any[]): number => {
+import { CartItem } from "./cart/actionTypes";
+
+export const computedTotalPrice = (arr: CartItem[]): number => {
   const totalCount = arr.reduce(
     (total, item) => total + item.quantity * item.price,
     0
@@ -6,10 +8,9 @@ export const computedTotalPrice = (arr: any[]): number => {
   return totalCount;
 };
 
-export const computedTotalCount = (arr: any[]): number => {
-  const totalCount = Object.keys(arr).reduce(
-    (sum, key: any) => arr[key].quantity + sum,
-    0
-  );
+export const computedTotalCount = (arr: CartItem[]): number => {
+  const totalCount = arr.reduce((total, item) => {
+    return total + item.quantity;
+  }, 0);
   return totalCount;
 };

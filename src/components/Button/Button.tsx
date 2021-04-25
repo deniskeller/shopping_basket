@@ -5,12 +5,13 @@ type ButtonProps = {
   className?: string;
   outline?: boolean;
   children?: React.ReactNode;
-  onClick?: any;
+  onClick?: (e: React.SyntheticEvent) => void;
 };
 
 const Button: React.FC<ButtonProps> = (props) => {
   return (
     <button
+      data-testid="btn-add"
       onClick={props.onClick}
       className={classNames("button", props.className, {
         "button--outline": props.outline,

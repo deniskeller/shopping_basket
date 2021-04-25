@@ -1,28 +1,22 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RouteComponentProps } from "react-router-dom";
-import { fetchProducts } from "../../store/products/actions";
-import { RootState } from "../../store/reducers/rootReducer";
 import { ProductItem, LoadingItem } from "../../components";
+import { CartItem } from "../../store/cart/actionTypes";
 
-const Main: React.FC<RouteComponentProps> = () => {
-  const dispatch = useDispatch();
-  const { products, error, loading } = useSelector(
-    (state: RootState) => state.product
-  );
+type MainProps = {
+  products: CartItem[];
+  error: string | null;
+  loading: boolean;
+};
 
-  React.useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
-
+const Main: React.FC<MainProps> = ({ products, error, loading }) => {
   if (error) {
-    return <h1>{error}</h1>;
+    return <h1>произошла ошибка при загрузке пользователей</h1>;
   }
 
   return (
-    <div className="container">
+    <div className="container" data-testid="main">
       <div className="content__top"></div>
-      <div className="content__items" data-testid="content__items">
+      <div className="content__items">
         {loading
           ? Array(products.length)
               .fill(0)
