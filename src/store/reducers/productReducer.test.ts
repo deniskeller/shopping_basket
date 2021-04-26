@@ -3,7 +3,7 @@ import { ProductActionTypes } from "../products/actionTypes";
 import { initialState, productReducer } from "./productReducer";
 
 describe("тесты редюсеров продуктов", () => {
-  const state = {
+  const mockState = {
     products: [],
     loading: true,
     error: null,
@@ -26,8 +26,8 @@ describe("тесты редюсеров продуктов", () => {
       payload: [1, 2, 3],
     };
 
-    expect(productReducer(state, action)).toEqual({
-      ...state,
+    expect(productReducer(mockState, action)).toEqual({
+      ...mockState,
       loading: false,
       products: action.payload,
     });

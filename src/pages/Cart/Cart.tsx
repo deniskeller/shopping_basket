@@ -4,10 +4,7 @@ import emptyCart from "../../assets/img/empty-cart.png";
 import { Link } from "react-router-dom";
 import { RootState } from "../../store/reducers/rootReducer";
 import { CartProduct, Input } from "../../components/index";
-import {
-  addNewFormItemAction,
-  clearCartAction,
-} from "../../store/cart/actions";
+import { addNewFormItem, clearCartAction } from "../../store/cart/actions";
 import { Button } from "../../components/index";
 import { CartItem } from "../../store/cart/actionTypes";
 
@@ -35,7 +32,7 @@ const Cart: React.FC = () => {
         price: +price,
         quantity: 1,
       };
-      dispatch(addNewFormItemAction(newItem));
+      dispatch(addNewFormItem(newItem));
       setName("");
       setPrice("");
     }

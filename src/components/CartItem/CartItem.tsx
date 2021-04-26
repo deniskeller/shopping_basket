@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import {
-  changeQuantityAction,
+  changeQuantity,
   deleteItemAction,
 } from "../../store/cart/actions";
 import { CartItem } from "../../store/cart/actionTypes";
@@ -24,11 +24,11 @@ const CartProduct: React.FC<ItemProps> = React.memo(({ item }) => {
   };
 
   const countPlus = () => {
-    dispatch(changeQuantityAction(item.quantity + 1, item.id));
+    dispatch(changeQuantity(item.quantity + 1, item.id));
   };
 
   const countMinus = () => {
-    dispatch(changeQuantityAction(item.quantity - 1, item.id));
+    dispatch(changeQuantity(item.quantity - 1, item.id));
   };
 
   return (

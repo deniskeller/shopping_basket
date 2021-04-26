@@ -3,7 +3,7 @@ import { deleteItemAction } from "../cart/actions";
 import { cartReducer } from "./cartReducer";
 
 describe("тесты редюсеров корзины", () => {
-  const state = {
+  const mockState = {
     items: [],
     totalPrice: 0,
     totalCount: 0,
@@ -12,6 +12,6 @@ describe("тесты редюсеров корзины", () => {
   it("delete product from cart", () => {
     deleteItemAction(0);
 
-    expect(state.items.length).toBe(0);
+    expect(mockState.items.length).toBe(0);
   });
 });
