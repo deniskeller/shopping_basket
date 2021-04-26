@@ -7,10 +7,10 @@ export const fetchProducts = () => {
   return async (dispatch: Dispatch<ProductAction>) => {
     try {
       dispatch(fetchProductsAction());
-      const response = await axios.get<CartItem[]>(
-        "http://localhost:3000/public/db.json"
-      );
-      dispatch(fetchProductsSuccessAction(response.data));
+      const response = await axios.get("http://localhost:3001/pizzas");
+      const data: CartItem[] = response.data.pizzas;
+      console.log("data: ", data);
+      dispatch(fetchProductsSuccessAction(data));
     } catch (error) {
       dispatch(
         fetchProductsErrorAction("произошла ошибка при загрузке товаров")
