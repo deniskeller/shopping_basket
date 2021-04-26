@@ -8,12 +8,12 @@ export const fetchProducts = () => {
     try {
       dispatch(fetchProductsAction());
       const response = await axios.get<CartItem[]>(
-        "http://localhost:3001/db.json"
+        "http://localhost:3000/public/db.json"
       );
       dispatch(fetchProductsSuccessAction(response.data));
     } catch (error) {
       dispatch(
-        fetchProductsErrorAction("произошла ошибка при загрузке пользователей")
+        fetchProductsErrorAction("произошла ошибка при загрузке товаров")
       );
     }
   };
