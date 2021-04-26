@@ -8,8 +8,7 @@ export const fetchProducts = () => {
     try {
       dispatch(fetchProductsAction());
       const response = await axios.get("http://localhost:3001/pizzas");
-      const data: CartItem[] = response.data.pizzas;
-      console.log("data: ", data);
+      const data: CartItem[] = response.data;
       dispatch(fetchProductsSuccessAction(data));
     } catch (error) {
       dispatch(
