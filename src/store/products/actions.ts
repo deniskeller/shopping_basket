@@ -8,7 +8,7 @@ export const fetchProducts = () => {
     try {
       dispatch(fetchProductsAction());
       const response = await axios.get<CartItem[]>(
-        "http://localhost:3000/db.json"
+        "http://localhost:3001/db.json"
       );
       dispatch(fetchProductsSuccessAction(response.data));
     } catch (error) {
