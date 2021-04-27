@@ -32,7 +32,8 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "test": "react-scripts test -u",
-    "json-server": "json-server --watch public/db.json --port=3001"
+    "json-server": "json-server --watch public/db.json --port=3001",
+    "start" : "node server.js"
   },
   "proxy": "http://localhost:3001",
   "eslintConfig": {
