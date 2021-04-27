@@ -14,4 +14,4 @@ to run tests
 
 ### `npm test`
 
-See [Demo](https://online-store-nine.vercel.app/).
+See [Demo](https://shopping-basket2.herokuapp.com/).
