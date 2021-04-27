@@ -7,7 +7,7 @@ export const fetchProducts = () => {
   return async (dispatch: Dispatch<ProductAction>) => {
     try {
       dispatch(fetchProductsAction());
-      const response = await axios.get("http://localhost:3001/pizzas");
+      const response = await axios.get("/pizzas");
       const data: CartItem[] = response.data;
       dispatch(fetchProductsSuccessAction(data));
     } catch (error) {
