@@ -42,7 +42,7 @@ describe("тесты редюсеров продуктов", () => {
 
     const action = {
       type: ProductActionTypes.FETCH_PRODUCTS_ERROR,
-      payload: "произошла ошибка при загрузке пользователей",
+      payload: "произошла ошибка при загрузке товаров",
     };
 
     expect(productReducer(stateWithError, action)).toEqual({

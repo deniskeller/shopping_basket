@@ -10,7 +10,7 @@ type MainProps = {
 
 const Main: React.FC<MainProps> = ({ products, error, loading }) => {
   if (error) {
-    return <h1>произошла ошибка при загрузке пользователей</h1>;
+    return <h2 className="error">{error}</h2>;
   }
 
   return (
@@ -18,7 +18,7 @@ const Main: React.FC<MainProps> = ({ products, error, loading }) => {
       <div className="content__top"></div>
       <div className="content__items">
         {loading
-          ? Array(products.length)
+          ? Array(10)
               .fill(0)
               .map((_, index) => <LoadingItem key={index} />)
           : products &&
